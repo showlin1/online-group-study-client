@@ -22,15 +22,21 @@ const Navbar = () => {
             <li className="px-5 py-2">Assignments</li>
         </NavLink>
         {
-            user && <NavLink style={styleNav} to={'/createAssignments'}>
+            user && <div className="flex">
+                <NavLink style={styleNav} to={'/createAssignments'}>
                 <li className="px-5 py-2">Create Assignments</li>
             </NavLink>
+            <NavLink style={styleNav} to={'/pendingAssignments'}>
+                <li className="px-5 py-2">Pending Assignments</li>
+            </NavLink>
+            </div>
+            
         }
-        <NavLink to={'/about'} style={styleNav}>
-            <li className="px-5 py-2">About Us</li>
+        <NavLink to={'/login'} style={styleNav}>
+            <li className="px-5 py-2">Login</li>
         </NavLink>
-        <NavLink to={'contact'} style={styleNav}>
-            <li className="px-5 py-2">Contact Us</li>
+        <NavLink to={'/register'} style={styleNav}>
+            <li className="px-5 py-2">Register</li>
         </NavLink>
     </>
     return (
