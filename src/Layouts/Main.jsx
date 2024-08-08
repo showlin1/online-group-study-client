@@ -1,10 +1,13 @@
+import { Outlet } from "react-router-dom";
+import Navbar from "../Components/Navbar";
 
 
 
 const Main = () => {
     return (
-        <div>
-            <h1>Welcome to Online Group Study</h1>
+        <div className="max-w-7xl mx-auto">
+            <Navbar></Navbar>
+            <Outlet></Outlet>
         </div>
     );
 };
