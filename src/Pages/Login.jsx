@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import login from "../assets/Login.gif"
 // import Footer from "../Footer/Footer";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
@@ -43,9 +44,10 @@ const Login = () => {
             })
     }
     return (
-        <div>
-            <h2 className="text-3xl text-center my-10">Please Login</h2>
-            <form onSubmit={handleLogin} className="md:w-3/4 lg:w-1/2 mx-auto">
+        <div className="flex items-center flex-col lg:flex-row justify-between py-16">
+             <img className="w-1/2" src={login} alt="" />
+            <form onSubmit={handleLogin} className="md:w-3/4 lg:w-1/2 px-4 py-4 md:px-8 max-w-lg border rounded-xl shadow-xl">
+                <h2 className="text-3xl text-center my-10">Please Login</h2>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Email</span>
@@ -73,8 +75,9 @@ const Login = () => {
                 <div className="form-control mt-6">
                     <button onClick={handleGithubSignIn} className="btn btn-primary">GitHub Login</button>
                 </div>
+                <p className="text-center mt-4 mb-8">Do not have an account <Link to='/register' className="text-blue-600 font-bold">Register</Link></p>
             </form>
-            <p className="text-center mt-4 mb-8">Do not have an account <Link to='/register' className="text-blue-600 font-bold">Register</Link></p>
+
             {/* <Footer></Footer> */}
         </div>
     );

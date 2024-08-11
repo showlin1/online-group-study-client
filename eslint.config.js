@@ -11,13 +11,14 @@ export default [
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      env: { browser: true, es2020: true, node:true },
       parserOptions: {
         ecmaVersion: 'latest',
-        ecmaFeatures: { jsx: true },
+        ecmaFeatures: { jsx: true},
         sourceType: 'module',
       },
     },
-    settings: { react: { version: '18.3' } },
+    settings: { react: { version: '18.3'} },
     plugins: {
       react,
       'react-hooks': reactHooks,
