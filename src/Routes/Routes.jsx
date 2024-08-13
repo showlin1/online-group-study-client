@@ -9,11 +9,13 @@ import PendingAssignments from "../Pages/PendingAssignments";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import ContactUs from "../Pages/ContactUs";
+import Page404 from "../Pages/Page404";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement: <Page404></Page404>,
         children: [
             {
                 path: '/',
