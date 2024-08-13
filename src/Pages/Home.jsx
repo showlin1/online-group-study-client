@@ -1,4 +1,5 @@
 import BannerSection from "../Components/BannerSection";
+import FAQ from "../Components/FAQ";
 
 
 const Home = () => {
@@ -6,6 +7,9 @@ const Home = () => {
         <div className="mt-14">
             <div>
                 <BannerSection></BannerSection>
+            </div>
+            <div>
+                <FAQ></FAQ>
             </div>
         </div>
     );

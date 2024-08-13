@@ -14,7 +14,6 @@ import slide5 from "../assets/group study.jpg"
 
 // import required modules
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import { Link } from 'react-router-dom';
 
 const BannerSection = () => {
     return (
@@ -44,7 +43,6 @@ const BannerSection = () => {
                             <div data-aos="fade-right" data-aos-duration="3000" className="max-w-md ">
                                 <h1 className="text-5xl font-bold text-white pb-5">Welcome Group Study</h1>
                                 <p className="mb-5 text-xl">If you want to study concepts or practice coding together, message me. My feeling is we all learn at double the speed when working together.</p>
-                                <Link to={'/allRooms'}><button className="px-8 py-3 rounded-full font-bold bg-primay hover:bg-cyan-600 text-xl">Book Now</button></Link>
                             </div>
                         </div>
                     </div>
@@ -57,7 +55,7 @@ const BannerSection = () => {
                             <div data-aos="fade-right" data-aos-duration="3000" className="max-w-md ">
                                 <h1 className="text-5xl font-bold text-white pb-5">Welcome Group Study</h1>
                                 <p className="mb-5 text-xl">If you want to study concepts or practice coding together, message me. My feeling is we all learn at double the speed when working together.</p>
-                                <Link to={'/allRooms'}><button className="px-8 py-3 rounded-full font-bold bg-primay hover:bg-cyan-600 text-xl">Book Now</button></Link>
+                                
                             </div>
                         </div>
                     </div>
@@ -70,7 +68,7 @@ const BannerSection = () => {
                             <div data-aos="fade-right" data-aos-duration="3000" className="max-w-md ">
                                 <h1 className="text-5xl font-bold text-white pb-5">Welcome Group Study</h1>
                                 <p className="mb-5 text-xl">If you want to study concepts or practice coding together, message me. My feeling is we all learn at double the speed when working together.</p>
-                                <Link to={'/allRooms'}><button className="px-8 py-3 rounded-full font-bold bg-primay hover:bg-cyan-600 text-xl">Book Now</button></Link>
+                                
                             </div>
                         </div>
                     </div>
@@ -83,7 +81,7 @@ const BannerSection = () => {
                             <div data-aos="fade-right" data-aos-duration="3000" className="max-w-md ">
                                 <h1 className="text-5xl font-bold text-white pb-5">Welcome Group Study</h1>
                                 <p className="mb-5 text-xl">If you want to study concepts or practice coding together, message me. My feeling is we all learn at double the speed when working together.</p>
-                                <Link to={'/allRooms'}><button className="px-8 py-3 rounded-full font-bold bg-primay hover:bg-cyan-600 text-xl">Book Now</button></Link>
+                                
                             </div>
                         </div>
                     </div>
@@ -96,7 +94,7 @@ const BannerSection = () => {
                             <div data-aos="fade-right" data-aos-duration="3000" className="max-w-md ">
                                 <h1 className="text-5xl font-bold text-white pb-5">Welcome Group Study</h1>
                                 <p className="mb-5 text-xl">If you want to study concepts or practice coding together, message me. My feeling is we all learn at double the speed when working together.</p>
-                                <Link to={'/allRooms'}><button className="px-8 py-3 rounded-full font-bold bg-primay hover:bg-cyan-600 text-xl">Book Now</button></Link>
+                                
                             </div>
                         </div>
                     </div>
