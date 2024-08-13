@@ -3,7 +3,6 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 
 
-
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
     const handleLogOut = () => {
@@ -33,11 +32,8 @@ const Navbar = () => {
             </div>
 
         }
-        <NavLink to={'/login'} style={styleNav}>
-            <li className="px-5 py-2">Login</li>
-        </NavLink>
-        <NavLink to={'/register'} style={styleNav}>
-            <li className="px-5 py-2">Register</li>
+        <NavLink to={'/contactUs'} style={styleNav}>
+            <li className="px-5 py-2">Contact Us</li>
         </NavLink>
     </>
     return (

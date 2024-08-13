@@ -8,6 +8,7 @@ import CreateAssignments from "../Pages/CreateAssignments";
 import PendingAssignments from "../Pages/PendingAssignments";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import ContactUs from "../Pages/ContactUs";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path:'/register',
                 element:<Register></Register>
+            },
+            {
+                path:'/contactUs',
+                element:<ContactUs></ContactUs>
             }
         ]
 
