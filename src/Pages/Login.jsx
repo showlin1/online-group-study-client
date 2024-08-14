@@ -44,7 +44,7 @@ const Login = () => {
             })
     }
     return (
-        <div className="flex items-center flex-col lg:flex-row justify-between py-16">
+        <div className="flex items-center flex-col lg:flex-row justify-between py-24">
              <img className="w-1/2" src={login} alt="" />
             <form onSubmit={handleLogin} className="md:w-3/4 lg:w-1/2 px-4 py-4 md:px-8 max-w-lg border rounded-xl shadow-xl">
                 <h2 className="text-3xl text-center my-10">Please Login</h2>

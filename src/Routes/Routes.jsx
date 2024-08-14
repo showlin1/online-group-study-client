@@ -1,5 +1,3 @@
-
-
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layouts/Main";
 import Home from "../Pages/Home";
@@ -10,6 +8,7 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import ContactUs from "../Pages/ContactUs";
 import Page404 from "../Pages/Page404";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -27,11 +26,12 @@ const router = createBrowserRouter([
             },
             {
                 path:'/createAssignments',
-                element:<CreateAssignments></CreateAssignments>,
+                element:<PrivateRoute><CreateAssignments></CreateAssignments></PrivateRoute>,
+                // loader:()=>fetch(`${import.meta.env.VITE_API_URL}/assignments`)
             },
             {
                 path:'/pendingAssignments',
-                element:<PendingAssignments></PendingAssignments>
+                element:<PrivateRoute><PendingAssignments></PendingAssignments></PrivateRoute>
             },
             {
                 path:'/login',

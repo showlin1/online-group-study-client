@@ -4,8 +4,8 @@ import FAQ from "../Components/FAQ";
 
 const Home = () => {
     return (
-        <div className="mt-14">
-            <div>
+        <div className=" py-24 ">
+            <div >
                 <BannerSection></BannerSection>
             </div>
             <div>

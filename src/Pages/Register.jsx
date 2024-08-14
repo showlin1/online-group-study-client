@@ -85,7 +85,7 @@ const Register = () => {
     }
 
     return (
-        <div>
+        <div className="py-24">
             <h2 className="text-3xl text-center my-10">Please Register</h2>
             <form onSubmit={handleRegister} className="md:w-3/4 lg:w-1/2 mx-auto">
                 <div className="form-control">

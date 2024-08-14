@@ -21,25 +21,24 @@ const Navbar = () => {
         <NavLink style={styleNav} to={'/assignments'}>
             <li className="px-5 py-2">Assignments</li>
         </NavLink>
-        {
-            user && <div className="flex">
-                <NavLink style={styleNav} to={'/createAssignments'}>
-                    <li className="px-5 py-2">Create Assignments</li>
-                </NavLink>
-                <NavLink style={styleNav} to={'/pendingAssignments'}>
-                    <li className="px-5 py-2">Pending Assignments</li>
-                </NavLink>
-            </div>
+        <div className="flex">
+            <NavLink style={styleNav} to={'/createAssignments'}>
+                <li className="px-5 py-2">Create Assignments</li>
+            </NavLink>
+            <NavLink style={styleNav} to={'/pendingAssignments'}>
+                <li className="px-5 py-2">Pending Assignments</li>
+            </NavLink>
+        </div>
 
-        }
+
         <NavLink to={'/contactUs'} style={styleNav}>
             <li className="px-5 py-2">Contact Us</li>
         </NavLink>
     </>
     return (
-        <div className="">
+        <div className="bg-cyan-100 fixed z-10 left-0 right-0">
             <div className="navbar container mx-auto">
-                
+
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -77,7 +76,7 @@ const Navbar = () => {
                                     <span>
                                         <h1 className="text-xl">{user?.email}</h1>
                                     </span>
-                                    <button onClick={handleLogOut} className="px-8 py-3 bg-primay  font-medium rounded">Log Out</button>
+                                    <button onClick={handleLogOut} className="px-8 py-3 bg-primary  font-medium rounded">Log Out</button>
                                 </ul>
                             </div>
 

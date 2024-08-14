@@ -2,7 +2,7 @@
 
 const PendingAssignments = () => {
     return (
-        <div>
+        <div className="py-24">
             <h1>Assignment</h1>
         </div>
     );

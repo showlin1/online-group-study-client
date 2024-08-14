@@ -5,11 +5,11 @@ import Footer from "./Footer";
 
 const Page404 = () => {
     return (
-        <div>
+        <div className="">
             <div>
                 <Navbar></Navbar>
             </div>
-            <div className="mt-8">
+            <div className="py-24">
                 <h1 className="text-9xl text-center text-blue-300 font-bold mb-4">404</h1>
                 <h2 className="text-5xl text-center font-bold mb-4"> Page Not Found</h2>
                 <p className="text-center font-bold text-green-500 mb-4">Opps!, the page you looking for does not exist</p>

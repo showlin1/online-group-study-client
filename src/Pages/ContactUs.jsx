@@ -2,7 +2,7 @@ import cover from '../assets/group studyy.jpg'
 import { Map, Marker } from "pigeon-maps"
 const ContactUs = () => {
     return (
-        <div className="mt-16 px-3 container mx-auto">
+        <div className=" py-24">
             <div className='relative'>
                 <img src={cover} className='w-full h-[400px]' alt="" />
                 <div className='absolute bottom-0 w-full h-full text-center py-10 bg-black bg-opacity-45 '>
