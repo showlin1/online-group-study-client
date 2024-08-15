@@ -23,11 +23,12 @@ const router = createBrowserRouter([
             {
                 path:'/assignments',
                 element:<Assignments></Assignments>,
+                // loader:()=>fetch(`${import.meta.env.VITE_API_URL}/assignments`)
             },
             {
                 path:'/createAssignments',
                 element:<PrivateRoute><CreateAssignments></CreateAssignments></PrivateRoute>,
-                // loader:()=>fetch(`${import.meta.env.VITE_API_URL}/assignments`)
+                
             },
             {
                 path:'/pendingAssignments',

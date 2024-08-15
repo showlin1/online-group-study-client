@@ -3,7 +3,7 @@ const FAQ = () => {
     return (
         <div className="pt-20">
             <div className="pb-10">
-                <h1 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl">
+                <h1 className="text-2xl font-semibold text-center text-cyan-600 capitalize lg:text-3xl">
                     FAQ!
                 </h1>
 

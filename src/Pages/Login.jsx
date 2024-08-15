@@ -9,7 +9,6 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
     const { signIn, handleGoogleSignIn, handleGithubSignIn } = useContext(AuthContext);
-
     const handleLogin = e => {
         e.preventDefault();
         console.log(e.currentTarget);

@@ -50,12 +50,12 @@ const CreateAssignments = () => {
     return (
         <div className="py-24 ">
             <div className="bg-[#ecc3cb] mt-10 p-24">
-                <h2 className="text-3xl text-center font-extrabold mb-4">Create an Assignment</h2>
+                <h2 className="text-4xl text-center font-bold mb-4 text-cyan-600">Create an Assignment</h2>
                 <form onSubmit={handleCreateAssignment}>
                     <div className="md:flex mb-8">
                         <div className="form-control md:w-1/2">
                             <label className="label">
-                                <span className="label-text">Image</span>
+                                <span className="label-text text-cyan-600 text-xl">Image</span>
                             </label>
                             <label className="input-group">
                                 <input type="text" name="imageUrl" className="input input-bordered w-full"
@@ -65,10 +65,10 @@ const CreateAssignments = () => {
                         </div>
                         <div className="form-control md:w-1/2 ml-4">
                             <label className="label">
-                                <span className="label-text">Assignment Title</span>
+                                <span className="label-text text-cyan-600 text-xl">Assignment Title</span>
                             </label>
                             <label className="input-group">
-                                <input type="text" name="title" className="input input-bordered w-full"
+                                <input type="text" name="title" className=" text-white input input-bordered w-full"
                                     placeholder="Assignment Title" />
                             </label>
 
@@ -78,7 +78,7 @@ const CreateAssignments = () => {
                     <div className="md:flex mb-8">
                         <div className="form-control md:w-1/2">
                             <label className="label">
-                                <span className="label-text">Description</span>
+                                <span className="label-text text-cyan-600 text-xl">Description</span>
                             </label>
                             <label className="input-group">
                                 <input type="text" name="description" className="input input-bordered w-full"
@@ -88,7 +88,7 @@ const CreateAssignments = () => {
                         </div>
                         <div className="form-control md:w-1/2 ml-4">
                             <label className="label">
-                                <span className="label-text">Marks</span>
+                                <span className="label-text text-cyan-600 text-xl">Marks</span>
                             </label>
                             <label className="input-group">
                                 <input type="text" name="marks" className="input input-bordered w-full"
@@ -101,26 +101,26 @@ const CreateAssignments = () => {
                     <div className="md:flex mb-8">
                         <div className="form-control md:w-1/2">
                             <label className="label">
-                                <span className="label-text">Assignment Difficulty Level</span>
+                                <span className="label-text text-cyan-600 text-xl">Assignment Difficulty Level</span>
                             </label>
                             <select name='difficulty'
                                 id='difficulty' className="p-3 rounded-xl">
-                                <option value="Easy">Easy</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Hard">Hard</option>
+                                <option className="text-white" value="Easy">Easy</option>
+                                <option className="text-white" value="Medium">Medium</option>
+                                <option className="text-white" value="Hard">Hard</option>
                             </select>
 
                         </div>
                         <div className="form-control md:w-1/2 ml-4">
                             <label className="label">
-                                <span className="label-text">Due Date</span>
+                                <span className="label-text text-cyan-600 text-xl">Due Date</span>
                             </label>
                             <DatePicker className="p-3 rounded-xl w-full" selected={startDate} onChange={(date) => setStartDate(date)} />
                         </div>
                     </div>
                     <div className="form-control w-full mb-8">
-                        <label htmlFor='emailAddress'>User Email</label>
-                        <input className=" p-3 rounded-xl" type="email" name="email" id="" defaultValue={user?.email}
+                        <label className="text-cyan-600 text-xl" htmlFor='emailAddress'>User Email</label>
+                        <input className=" p-3 rounded-xl text-white" type="email" name="email" id="" defaultValue={user?.email}
                         />
                     </div>
                     <input type="submit" value="CREATE ASSIGNMENT" className="btn btn-block bg-cyan-400 text-white" />
