@@ -1,12 +1,16 @@
 import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
-import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import toast from "react-hot-toast";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const CreateAssignments = () => {
     const [startDate, setStartDate] = useState(new Date())
-    const {user}=useContext(AuthContext);
+    const { user } = useContext(AuthContext);
+    // const navigate = useNavigate()
+
     const handleCreateAssignment = e => {
         e.preventDefault();
         const form = e.target;
@@ -14,10 +18,34 @@ const CreateAssignments = () => {
         const title = form.title.value;
         const description = form.description.value;
         const marks = form.marks.value;
-        const difficultyLevel = form.difficultLevel.value;
         const dueDate = startDate;
         const email = form.email.value;
+        const difficulty = form.difficulty.value;
+        const assignmentData = { imageUrl, title, description, marks, difficulty, dueDate, email }
+        console.log(assignmentData)
+        // send data to the server
+        fetch(`${import.meta.env.VITE_API_URL}/assignment`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(assignmentData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Assignment created Successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+            })
+
     }
+
 
     return (
         <div className="py-24 ">
@@ -75,10 +103,11 @@ const CreateAssignments = () => {
                             <label className="label">
                                 <span className="label-text">Assignment Difficulty Level</span>
                             </label>
-                            <select className="p-3 rounded-xl">
-                                <option value="easy">Easy</option>
-                                <option value="medium">Medium</option>
-                                <option value="hard">Hard</option>
+                            <select name='difficulty'
+                                id='difficulty' className="p-3 rounded-xl">
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
                             </select>
 
                         </div>
@@ -91,8 +120,8 @@ const CreateAssignments = () => {
                     </div>
                     <div className="form-control w-full mb-8">
                         <label htmlFor='emailAddress'>User Email</label>
-                        <input className=" p-3 rounded-xl" type="email" name="email" id=""defaultValue={user?.email} 
-                             />
+                        <input className=" p-3 rounded-xl" type="email" name="email" id="" defaultValue={user?.email}
+                        />
                     </div>
                     <input type="submit" value="CREATE ASSIGNMENT" className="btn btn-block bg-cyan-400 text-white" />
                 </form>
