@@ -1,7 +1,42 @@
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const AssignmentCard = ({ assignment }) => {
-    const { dueDate, title, imageUrl, marks, description, difficulty } = assignment;
+    const { _id, dueDate, title, imageUrl, marks, description, difficulty } = assignment;
+
+    const handleDelete = _id => {
+        console.log(_id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                fetch(`${import.meta.env.VITE_API_URL}/assignments/${_id}`, {
+                    method: "DELETE"
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your Assignment has been deleted.",
+                                icon: "success"
+                            });
+                            // setControl(!control);
+                        }
+                    })
+            }
+        });
+    }
+
     return (
         <div className="card bg-slate-50 text-slate-900 w-full border  shadow-xl">
             <figure className="px-10 pt-10">
@@ -18,12 +53,12 @@ const AssignmentCard = ({ assignment }) => {
                     <p>Due Date: {new Date(dueDate).toLocaleDateString()}</p>
                 </div>
                 <div className=" flex w-full gap-2 justify-between">
-                    <button className="btn hover:bg-teal-600 bg-cyan-400 text-white w-1/2">Delete</button>
-                    <button className="btn hover:bg-teal-600 w-1/2 bg-cyan-400 text-white">Update</button>
+                    <button onClick={() => handleDelete(_id)} className="btn hover:bg-teal-600 bg-cyan-400 text-white w-1/2">Delete</button>
+                    <Link to={`/updateAssignment/${_id}`} className="btn hover:bg-teal-600 w-1/2 bg-cyan-400 text-white">Update</Link>
                 </div>
-                <div className=" w-full">
-                    <button className="btn w-full hover:bg-teal-600 bg-cyan-400 text-white">View Details</button>
-                </div>
+                <Link className=" w-full">
+                    <button className="btn w-full hover:bg-teal-600 bg-cyan-400 text-white">Assignment Details</button>
+                </Link>
             </div>
         </div>
     );
