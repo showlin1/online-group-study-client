@@ -11,7 +11,7 @@ const CreateAssignments = () => {
     const { user } = useContext(AuthContext);
     // const navigate = useNavigate()
 
-    const handleCreateAssignment = e => {
+    const handleCreateAssignment = async e => {
         e.preventDefault();
         const form = e.target;
         const imageUrl = form.imageUrl.value;
@@ -21,28 +21,26 @@ const CreateAssignments = () => {
         const dueDate = startDate;
         const email = form.email.value;
         const difficulty = form.difficulty.value;
-        const assignmentData = { imageUrl, title, description, marks, difficulty, dueDate, email }
+        const assignmentData = { imageUrl, title, description, marks, difficulty, dueDate, othersUser: { email } }
         console.log(assignmentData)
-        // send data to the server
-        fetch(`${import.meta.env.VITE_API_URL}/assignment`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(assignmentData)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.insertedId) {
-                    Swal.fire({
-                        title: 'Success',
-                        text: 'Assignment created Successfully',
-                        icon: 'success',
-                        confirmButtonText: 'Ok'
-                    })
-                }
-            })
+        try {
+            const { data } = await axios.post(
+                `${import.meta.env.VITE_API_URL}/assignment`,
+                assignmentData
+            )
+            console.log(data)
+            if (data.insertedId) {
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Assignment created Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
+            }
+            // navigate('/my-posted-jobs')
+        } catch (err) {
+            console.log(err)
+        }
 
     }
 
@@ -105,9 +103,9 @@ const CreateAssignments = () => {
                             </label>
                             <select name='difficulty'
                                 id='difficulty' className="p-3 rounded-xl">
-                                <option className="text-white" value="Easy">Easy</option>
-                                <option className="text-white" value="Medium">Medium</option>
-                                <option className="text-white" value="Hard">Hard</option>
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
                             </select>
 
                         </div>

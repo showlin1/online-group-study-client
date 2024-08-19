@@ -12,13 +12,13 @@ const Footer = () => {
 
                 </nav>
                 <div>
-                <Link to="/"  className=" text-2xl hover:text-black">Online Group Study</Link>
+                <Link to="/"  className=" text-2xl hover:text-black">Web Development</Link>
                     <a >USA</a>
                     <a >123, New Lenox</a>
                     <a >Chicago, IL 60606</a>
                 </div>
                 <nav>
-                    <h6 className="text-2xl">Social</h6>
+                    <Link to="/contactUs" className="text-2xl hover:text-black">Social</Link>
                     <p>info@email.com</p>
                     <p>+1 840 841 25 69</p>
                     <div className="grid grid-flow-col gap-4">

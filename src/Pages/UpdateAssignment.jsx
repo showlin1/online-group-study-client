@@ -1,8 +1,6 @@
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
-import Footer from "./Footer";
-import Navbar from "../Components/Navbar";
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import toast from "react-hot-toast";
@@ -11,16 +9,14 @@ import Swal from "sweetalert2";
 
 const UpdateAssignment = () => {
     const assignment = useLoaderData()
-    const { imageUrl, title, description, marks, difficulty, dueDate, email } = assignment 
-    // const navigate = useNavigate()
-    const { _id } = useParams();
-    console.log(_id);
+    const { _id, imageUrl, title, description, marks, difficulty, dueDate, email } = assignment
 
-    
+    const navigate = useNavigate();
+
     const { user } = useContext(AuthContext)
-    const [startDate, setStartDate] = useState(new Date(deadline) || new Date())
+    const [startDate, setStartDate] = useState(new Date(dueDate) || new Date())
 
-    const handleUpdateAssignment = e => {
+    const handleUpdateAssignment = async e => {
         e.preventDefault()
         const form = e.target
         const imageUrl = form.imageUrl.value
@@ -31,37 +27,37 @@ const UpdateAssignment = () => {
         const difficulty = form.difficulty.value
         const marks = form.marks.value
 
-        const updateAssignment = {imageUrl, title, description, marks, difficulty, dueDate, email}
+        const updateAssignment = { imageUrl, title, description, marks, difficulty, dueDate, email }
         console.log(updateAssignment)
 
         // send data to the server
-        fetch(`${import.meta.env.VITE_API_URL}/updateAssignment/${_id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(updateAssignment)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.modifiedCount > 0) {
-                    Swal.fire({
-                        title: 'Success',
-                        text: 'Assignment Updated Successfully',
-                        icon: 'success',
-                        confirmButtonText: 'Ok'
-                    })
-                }
-            })
+
+        try {
+            const { data } = await axios.put(
+                `${import.meta.env.VITE_API_URL}/assignments/${_id}`,
+                updateAssignment
+            )
+            console.log(data)
+            // toast.success('Job Data Updated Successfully!')
+            if (data.modifiedCount > 0) {
+                Swal.fire({
+                    title: 'Success',
+                    text: 'Assignment Updated Successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
+            }
+            navigate('/assignments')
+        } catch (err) {
+            console.log(err)
+            toast.error(err.message)
+        }
+
     }
 
 
     return (
         <div>
-            <div>
-                <Navbar></Navbar>
-            </div>
             <div className="py-24">
                 <div className="bg-[#ecc3cb] mt-10 p-24">
                     <h2 className="text-4xl text-center font-bold mb-4 text-cyan-600">Update an Assignment</h2>
@@ -82,7 +78,7 @@ const UpdateAssignment = () => {
                                     <span className="label-text text-cyan-600 text-xl">Assignment Title</span>
                                 </label>
                                 <label className="input-group">
-                                    <input type="text" name="title" defaultValue={title} className=" text-white input input-bordered w-full"
+                                    <input type="text" name="title" defaultValue={title} className="  input input-bordered w-full"
                                         placeholder="Assignment Title" />
                                 </label>
 
@@ -119,9 +115,9 @@ const UpdateAssignment = () => {
                                 </label>
                                 <select name='difficulty' defaultValue={difficulty}
                                     id='difficulty' className="p-3 rounded-xl">
-                                    <option className="text-white" value="Easy">Easy</option>
-                                    <option className="text-white" value="Medium">Medium</option>
-                                    <option className="text-white" value="Hard">Hard</option>
+                                    <option value="Easy">Easy</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Hard">Hard</option>
                                 </select>
 
                             </div>
@@ -134,15 +130,12 @@ const UpdateAssignment = () => {
                         </div>
                         <div className="form-control w-full mb-8">
                             <label className="text-cyan-600 text-xl" htmlFor='emailAddress'>User Email</label>
-                            <input className=" p-3 rounded-xl text-white" type="email" name="email" id="" defaultValue={user?.email}
+                            <input className=" p-3 rounded-xl" type="email" name="email" id="" defaultValue={user?.email}
                             />
                         </div>
                         <input type="submit" value="UPDATE ASSIGNMENT" className="btn btn-block bg-cyan-400 text-white" />
                     </form>
                 </div>
-            </div>
-            <div>
-                <Footer></Footer>
             </div>
         </div>
     );

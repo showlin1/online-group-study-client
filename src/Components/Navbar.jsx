@@ -41,15 +41,16 @@ const Navbar = () => {
         <NavLink style={styleNav} to={'/assignments'}>
             <li className="px-5 py-2">Assignments</li>
         </NavLink>
-        <div className="flex">
-            <NavLink style={styleNav} to={'/createAssignments'}>
-                <li className="px-5 py-2">Create Assignments</li>
-            </NavLink>
-            <NavLink style={styleNav} to={'/pendingAssignments'}>
-                <li className="px-5 py-2">Pending Assignments</li>
-            </NavLink>
-        </div>
 
+        <NavLink style={styleNav} to={'/createAssignments'}>
+            <li className="px-5 py-2">Create Assignments</li>
+        </NavLink>
+        <NavLink style={styleNav} to={'/pendingAssignments'}>
+            <li className="px-5 py-2">Pending Assignments</li>
+        </NavLink>
+        <NavLink style={styleNav} to={'/mySubmitAssignments'}>
+            <li className="px-5 py-2">My Submitted Assignments</li>
+        </NavLink>
 
         <NavLink to={'/contactUs'} style={styleNav}>
             <li className="px-5 py-2">Contact Us</li>
@@ -68,7 +69,7 @@ const Navbar = () => {
                             {navLinks}
                         </ul>
                     </div>
-                    <Link to={'/'} className="text-2xl text-cyan-600 font-black cursor-pointer hover:text-teal-600">Online Group Study</Link>
+                    <Link to={'/'} className="text-2xl text-cyan-600 font-black cursor-pointer hover:text-teal-600">Web Development</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 text-lg">

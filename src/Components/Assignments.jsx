@@ -14,7 +14,6 @@ const Assignments = () => {
     }, [])
     return (
         <div className="py-24">
-            {/* <Tabcategories assignments={assignments}></Tabcategories> */}
             <div className="py-10">
                 <h1 className="text-2xl font-semibold text-center text-cyan-400 capitalize lg:text-3xl ">
                     Our Assignments
@@ -27,9 +26,6 @@ const Assignments = () => {
                 </div>
             </div>
             <div>
-                {/* <label className=" w-full items-center mb-2">
-                    <span className=" text-2xl text-center">Assignment Difficulty Level</span>
-                </label> */}
                 <h2 className="text-2xl text-center mb-2">Assignment Difficulty Level</h2>
                 <select name='difficulty'
                     id='difficulty' className="p-3 mb-8 w-full border bg-cyan-400 rounded-xl">

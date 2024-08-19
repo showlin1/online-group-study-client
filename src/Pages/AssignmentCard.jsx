@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -33,6 +34,7 @@ const AssignmentCard = ({ assignment }) => {
                             // setControl(!control);
                         }
                     })
+                    
             }
         });
     }
@@ -46,7 +48,7 @@ const AssignmentCard = ({ assignment }) => {
             </figure>
             <div className="card-body ">
                 <h2 className="card-title">{title}</h2>
-                <p>{description}</p>
+                <p>{description.substring(0, 100)}.....</p>
                 <p>Difficulty Level: {difficulty}</p>
                 <div className="flex  gap-28">
                     <p>Marks: {marks}</p>
@@ -54,9 +56,9 @@ const AssignmentCard = ({ assignment }) => {
                 </div>
                 <div className=" flex w-full gap-2 justify-between">
                     <button onClick={() => handleDelete(_id)} className="btn hover:bg-teal-600 bg-cyan-400 text-white w-1/2">Delete</button>
-                    <Link to={`/updateAssignment/${_id}`} className="btn hover:bg-teal-600 w-1/2 bg-cyan-400 text-white">Update</Link>
+                    <Link to={`/assignments/${_id}`} className="btn hover:bg-teal-600 w-1/2 bg-cyan-400 text-white">Update</Link>
                 </div>
-                <Link className=" w-full">
+                <Link to={`/assignment/${_id}`} className=" w-full">
                     <button className="btn w-full hover:bg-teal-600 bg-cyan-400 text-white">Assignment Details</button>
                 </Link>
             </div>

@@ -4,7 +4,6 @@ import BannerSection from "../Components/BannerSection";
 import FAQ from "../Components/FAQ";
 import AssignmentCard from "./AssignmentCard";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 
 const Home = () => {
