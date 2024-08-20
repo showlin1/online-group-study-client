@@ -1,3 +1,4 @@
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -5,7 +6,7 @@ import Swal from "sweetalert2";
 
 const AssignmentCard = ({ assignment }) => {
     const { _id, dueDate, title, imageUrl, marks, description, difficulty } = assignment;
-
+    const [control, setControl] = useState(false);
     const handleDelete = _id => {
         console.log(_id);
         Swal.fire({
@@ -31,10 +32,10 @@ const AssignmentCard = ({ assignment }) => {
                                 text: "Your Assignment has been deleted.",
                                 icon: "success"
                             });
-                            // setControl(!control);
+                            setControl(!control);
                         }
                     })
-                    
+
             }
         });
     }

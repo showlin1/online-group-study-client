@@ -11,6 +11,7 @@ import Page404 from "../Pages/Page404";
 import PrivateRoute from "./PrivateRoute";
 import UpdateAssignment from "../Pages/UpdateAssignment";
 import AssignmentDetails from "../Pages/AssignmentDetails";
+import MySubmitAssignments from "../Pages/MySubmitAssignments";
 
 const router = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
                 path:'/assignment/:id',
                 element:<PrivateRoute><AssignmentDetails></AssignmentDetails></PrivateRoute>,
                 loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`)
+            },
+            {
+                path:'/mySubmitAssignments',
+                element:<PrivateRoute><MySubmitAssignments></MySubmitAssignments></PrivateRoute>
             }
         ]
 

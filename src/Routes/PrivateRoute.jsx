@@ -6,7 +6,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
     if (loading) {
-        return <progress className="progress w-56 mr-5"></progress>
+        return <progress className="progress py-24 w-56 mr-5"></progress>
     }
     if (user) {
         return children;

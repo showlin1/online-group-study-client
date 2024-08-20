@@ -16,8 +16,8 @@ const TakeAssignmentModal = ({ handleTakeAssignment, assignment }) => {
 
     const handleTakingAssignment = async e => {
         e.preventDefault()
-        if (user?.email === othersUser?.email)
-            return alert('Action not permitted!')
+        // if (user?.email === othersUser?.email)
+            // return alert('Action not permitted!')
         const form = e.target;
         const email = user?.email
         const dueDate = startDate
@@ -35,6 +35,7 @@ const TakeAssignmentModal = ({ handleTakeAssignment, assignment }) => {
             status,
             noteText,
             othersUser_Email: othersUser?.email,
+            othersUser,
         }
 
         try {
@@ -51,7 +52,7 @@ const TakeAssignmentModal = ({ handleTakeAssignment, assignment }) => {
                     confirmButtonText: 'Ok'
                 })
             }
-            // navigate('/my-posted-jobs')
+            navigate('/mySubmitAssignments')
         } catch (err) {
             console.log(err)
         }

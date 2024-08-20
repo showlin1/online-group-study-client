@@ -66,7 +66,7 @@ const CreateAssignments = () => {
                                 <span className="label-text text-cyan-600 text-xl">Assignment Title</span>
                             </label>
                             <label className="input-group">
-                                <input type="text" name="title" className=" text-white input input-bordered w-full"
+                                <input type="text" name="title" className=" input input-bordered w-full"
                                     placeholder="Assignment Title" />
                             </label>
 
@@ -118,7 +118,7 @@ const CreateAssignments = () => {
                     </div>
                     <div className="form-control w-full mb-8">
                         <label className="text-cyan-600 text-xl" htmlFor='emailAddress'>User Email</label>
-                        <input className=" p-3 rounded-xl text-white" type="email" name="email" id="" defaultValue={user?.email}
+                        <input className=" p-3 rounded-xl" type="email" name="email" id="" defaultValue={user?.email}
                         />
                     </div>
                     <input type="submit" value="CREATE ASSIGNMENT" className="btn btn-block bg-cyan-400 text-white" />
