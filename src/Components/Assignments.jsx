@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const Assignments = () => {
     const [assignments, setAssignments] = useState([])
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_URL}/assignments`)
+        axios.get(`${import.meta.env.VITE_API_URL}/assignments`,{ withCredentials: true })
             .then(res => {
                 setAssignments(res.data);
             })

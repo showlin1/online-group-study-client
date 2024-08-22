@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 // import Footer from "../Footer/Footer";
 import Swal from "sweetalert2";
@@ -9,7 +9,9 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 
 const Register = () => {
-
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state || '/';
     const { createUser } = useContext(AuthContext);
     // const [registerError, setRegisterError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -75,7 +77,7 @@ const Register = () => {
                         confirmButtonText: 'Ok'
                     })
                 }
-
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 console.error(error);

@@ -2,20 +2,42 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
+import GiveMark from "./GiveMark";
 
 
 const MySubmitAssignments = () => {
     const { user } = useContext(AuthContext)
     const [assignments, setAssignments] = useState([])
 
+    const [giveMarks, setGiveMarks] = useState([])
+    useEffect(() => {
+        axios.get(`${import.meta.env.VITE_API_URL}/giveMarks`)
+            .then(res => {
+                setGiveMarks(res.data);
+            })
+    }, [])
+    console.log(giveMarks);
+
+
     useEffect(() => {
         getData()
     }, [user])
 
     const getData = async () => {
-        const { data } = await axios(`${import.meta.env.VITE_API_URL}/myAssignments/${user?.email}`)
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/myAssignments/${user?.email}`,{
+            withCredentials:true
+        })
         setAssignments(data)
     }
+    // handle status
+    const handleStatus = async (id, status) => {
+        const { data } = await axios.patch(`${import.meta.env.VITE_API_URL}/myAssignment/${id}`,
+            {withCredentials:true, status }
+        )
+        console.log(data);
+        getData()
+    }
+
 
     const handleDelete = async id => {
         try {
@@ -83,28 +105,24 @@ const MySubmitAssignments = () => {
                                                     <span>Assignment Marks</span>
                                                 </button>
                                             </th>
-
-                                            <th
-                                                scope='col'
-                                                className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'
-                                            >
-                                                Deadline
-                                            </th>
-                                            <th
-                                                scope='col'
-                                                className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'
-                                            >
-                                                difficulty
-                                            </th>
                                             <th
                                                 scope='col'
                                                 className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'
                                             >
                                                 noteText
                                             </th>
+                                            <th
+                                                scope='col'
+                                                className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'
+                                            >
+                                                Obtained Marks
+                                            </th>
 
                                             <th className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'>
                                                 Delete
+                                            </th>
+                                            <th className='px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500'>
+                                                Action
                                             </th>
                                         </tr>
                                     </thead>
@@ -120,29 +138,29 @@ const MySubmitAssignments = () => {
                                                         {assignment.email}
                                                     </td>
                                                     <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
-                                                        {assignment.status}
+                                                        <div
+                                                            className={`inline-flex items-center px-3 py-1 rounded-full gap-x-2 ${assignment.status === 'Pending' &&
+                                                                'bg-yellow-100/60 text-yellow-500'
+                                                                } ${assignment.status === 'In Progress' &&
+                                                                'bg-blue-100/60 text-blue-500'
+                                                                } ${assignment.status === 'Complete' &&
+                                                                'bg-emerald-100/60 text-emerald-500'
+                                                                } ${assignment.status === 'Rejected' &&
+                                                                'bg-red-100/60 text-red-500'
+                                                                }`}
+                                                        >
+                                                            <span
+                                                                className={`h-1.5 w-1.5 rounded-full ${assignment.status === 'Pending' && 'bg-yellow-500'
+                                                                    } ${assignment.status === 'In Progress' && 'bg-blue-500'
+                                                                    } ${assignment.status === 'Complete' && 'bg-green-500'} 
+                                                                     ${assignment.status === 'Rejected' && 'bg-red-500'} `}
+                                                            ></span>
+                                                            <h2 className='text-sm font-normal '>{assignment.status}</h2>
+                                                        </div>
                                                     </td>
 
-                                                    <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
+                                                    <td className='px-4 py-4 text-center text-sm text-gray-500  whitespace-nowrap'>
                                                         {assignment.marks}
-                                                    </td>
-                                                    <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
-                                                        {new Date(assignment.dueDate).toLocaleDateString()}
-                                                    </td>
-                                                    <td className='px-4 py-4 text-sm whitespace-nowrap'>
-                                                        <div className='flex items-center gap-x-2'>
-                                                            <p
-                                                                className={`px-3 py-1 ${assignment.difficulty === 'Easy' &&
-                                                                    'text-blue-500 bg-blue-100/60'
-                                                                    } ${assignment.difficulty === 'Medium' &&
-                                                                    'text-emerald-500 bg-emerald-100/60'
-                                                                    } ${assignment.difficulty === 'Hard' &&
-                                                                    'text-pink-500 bg-pink-100/60'
-                                                                    } text-xs  rounded-full`}
-                                                            >
-                                                                {assignment.difficulty}
-                                                            </p>
-                                                        </div>
                                                     </td>
 
                                                     <td
@@ -152,6 +170,17 @@ const MySubmitAssignments = () => {
                                                         {assignment.noteText}
                                                     </td>
 
+                                                    <td>
+                                                    {
+                                                        giveMarks.map(giveMark => <div className="flex items-center gap-x-6" key={giveMark._id}>
+                                                            <td className='px-4  py-4 text-center text-sm text-gray-500  whitespace-nowrap'>
+                                                                {giveMark.obtainedMark}
+                                                            </td>
+
+                                                        </div>)
+
+                                                    }
+                                                    </td>
                                                     <td className='px-4 py-4 text-sm whitespace-nowrap'>
                                                         <div className='flex items-center gap-x-6'>
                                                             <button onClick={() => handleDelete(assignment._id)}
@@ -171,28 +200,37 @@ const MySubmitAssignments = () => {
                                                                     />
                                                                 </svg>
                                                             </button>
-
-                                                            {/* <button className='text-gray-500 transition-colors duration-200   hover:text-yellow-500 focus:outline-none'>
-                                                                <svg
-                                                                    xmlns='http://www.w3.org/2000/svg'
-                                                                    fill='none'
-                                                                    viewBox='0 0 24 24'
-                                                                    strokeWidth='1.5'
-                                                                    stroke='currentColor'
-                                                                    className='w-5 h-5'
-                                                                >
-                                                                    <path
-                                                                        strokeLinecap='round'
-                                                                        strokeLinejoin='round'
-                                                                        d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10'
-                                                                    />
-                                                                </svg>
-                                                            </button> */}
                                                         </div>
                                                     </td>
+                                                    <td className='px-4 py-4 text-sm whitespace-nowrap'>
+                                                        {/* Complete Button */}
+                                                        <button
+                                                            disabled={assignment.status !== 'In Progress'}
+                                                            onClick={() => handleStatus(assignment._id, 'Complete')}
+                                                            title='Mark Complete'
+                                                            className='text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none disabled:cursor-not-allowed'
+                                                        >
+                                                            <svg
+                                                                xmlns='http://www.w3.org/2000/svg'
+                                                                fill='none'
+                                                                viewBox='0 0 24 24'
+                                                                strokeWidth='1.5'
+                                                                stroke='currentColor'
+                                                                className='w-5 h-5'
+                                                            >
+                                                                <path
+                                                                    strokeLinecap='round'
+                                                                    strokeLinejoin='round'
+                                                                    d='M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75'
+                                                                />
+                                                            </svg>
+                                                        </button>
+                                                    </td>
+
                                                 </tr>
                                             ))
                                         }
+
                                     </tbody>
                                 </table>
                             </div>

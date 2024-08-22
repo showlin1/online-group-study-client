@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import login from "../assets/Login.gif"
 // import Footer from "../Footer/Footer";
 import Swal from "sweetalert2";
@@ -8,11 +8,17 @@ import { AuthContext } from "../Provider/AuthProvider";
 
 
 const Login = () => {
+    const navigate = useNavigate()
+    const location = useLocation();
     const { signIn, handleGoogleSignIn, handleGithubSignIn } = useContext(AuthContext);
+
+    const from = location.state || '/';
+
     const handleLogin = e => {
         e.preventDefault();
         console.log(e.currentTarget);
         const form = new FormData(e.currentTarget);
+        const name = form.get('name');
         const email = form.get('email');
         const password = form.get('password');
         console.log(email, password);
@@ -27,7 +33,8 @@ const Login = () => {
                         confirmButtonText: 'Ok'
                     })
                 }
-                // alert('login Successfully');
+
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 console.error(error);
@@ -44,9 +51,15 @@ const Login = () => {
     }
     return (
         <div className="flex items-center flex-col lg:flex-row justify-between py-24">
-             <img className="w-1/2" src={login} alt="" />
+            <img className="w-1/2" src={login} alt="" />
             <form onSubmit={handleLogin} className="md:w-3/4 lg:w-1/2 px-4 py-4 md:px-8 max-w-lg border rounded-xl shadow-xl">
                 <h2 className="text-3xl text-center my-10">Please Login</h2>
+                <div className="form-control">
+                    <label className="label">
+                        <span className="label-text">Name</span>
+                    </label>
+                    <input type="text" placeholder="Name" name="name" className="input input-bordered" required />
+                </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Email</span>

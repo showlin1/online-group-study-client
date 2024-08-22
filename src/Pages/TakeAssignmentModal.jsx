@@ -17,7 +17,7 @@ const TakeAssignmentModal = ({ handleTakeAssignment, assignment }) => {
     const handleTakingAssignment = async e => {
         e.preventDefault()
         // if (user?.email === othersUser?.email)
-            // return alert('Action not permitted!')
+        //     return alert('Action not permitted!')
         const form = e.target;
         const email = user?.email
         const dueDate = startDate
