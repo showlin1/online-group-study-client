@@ -3,35 +3,55 @@ import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
 import GiveMark from "./GiveMark";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 const PendingAssignments = () => {
 
     const { user } = useContext(AuthContext)
-    const [assignments, setAssignments] = useState([])
-
     const [giveMark, setGiveMark] = useState(false)
 
-    useEffect(() => {
-        getData()
-    }, [user])
+    const { data: assignments = [], refetch } = useQuery({
+        queryFn: () => getData(),
+        queryKey: ['assignments', user?.email],
+    })
+
+    // const [assignments, setAssignments] = useState([])
+
+    // useEffect(() => {
+    //     getData()
+    // }, [user])
 
     const getData = async () => {
         const { data } = await axios(`${import.meta.env.VITE_API_URL}/assignmentRequest/${user?.email}`, {
             withCredentials: true
         })
-        setAssignments(data)
+        return data
     }
     // console.log(assignments)
 
+    const { mutate, mutateAsync } = useMutation({
+        mutationFn: async ({ id, status }) => {
+            const { data } = await axios.patch(`${import.meta.env.VITE_API_URL}/myAssignment/${id}`,
+                { status })
+            console.log(data);
+        },
+        onSuccess: () => {
+            console.log('wow, data updated');
+            toast.success('Updated');
+            //refresh ui for latest data
+            refetch()
+        }
+    })
+    // handle status
     const handleStatus = async (id, prevStatus, status) => {
         if (prevStatus === status)
             return console.log('Sorry')
-        console.log(id, prevStatus, status)
-        const { data } = await axios.patch(`${import.meta.env.VITE_API_URL}/myAssignment/${id}`,
-            { status }
-        )
-        console.log(data);
-        getData()
+        // console.log(id, prevStatus, status)
+
+        // console.log(data);
+        // getData()
+        await mutateAsync({ id, status })
     }
 
     const giveMarkModal = () => {

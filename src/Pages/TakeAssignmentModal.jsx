@@ -19,13 +19,15 @@ const TakeAssignmentModal = ({ handleTakeAssignment, assignment }) => {
         // if (user?.email === othersUser?.email)
         //     return alert('Action not permitted!')
         const form = e.target;
-        const email = user?.email
-        const dueDate = startDate
-        const pdfLink = form.pdfLink.value
-        const status = 'Pending'
-        const noteText = form.noteText.value
+        const email = user?.email;
+        const assignmentId=_id;
+        const dueDate = startDate;
+        const pdfLink = form.pdfLink.value;
+        const status = 'Pending';
+        const noteText = form.noteText.value;
 
         const myAssignmentData = {
+            assignmentId,
             title,
             email,
             dueDate,
@@ -54,7 +56,9 @@ const TakeAssignmentModal = ({ handleTakeAssignment, assignment }) => {
             }
             navigate('/mySubmitAssignments')
         } catch (err) {
-            console.log(err)
+            // console.log(err)
+            toast.success(err.response.data);
+            e.target.reset()
         }
     }
 
