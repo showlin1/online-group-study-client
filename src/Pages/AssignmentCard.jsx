@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 
 const AssignmentCard = ({ assignment }) => {
     const { _id, dueDate, title, imageUrl, marks, description, difficulty } = assignment;
-    const [control, setControl] = useState(false);
     
     const handleDelete = _id => {
         console.log(_id);
@@ -33,7 +32,7 @@ const AssignmentCard = ({ assignment }) => {
                                 text: "Your Assignment has been deleted.",
                                 icon: "success"
                             });
-                            setControl(!control);
+                            
                         }
                     })
 

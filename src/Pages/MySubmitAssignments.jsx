@@ -16,7 +16,7 @@ const MySubmitAssignments = () => {
                 setGiveMarks(res.data);
             })
     }, [])
-    console.log(giveMarks);
+    // console.log(giveMarks);
 
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const MySubmitAssignments = () => {
         const { data } = await axios.patch(`${import.meta.env.VITE_API_URL}/myAssignment/${id}`,
             {withCredentials:true, status }
         )
-        console.log(data);
+        // console.log(data);
         getData()
     }
 

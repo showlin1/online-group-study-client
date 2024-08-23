@@ -22,7 +22,7 @@ const CreateAssignments = () => {
         const email = form.email.value;
         const difficulty = form.difficulty.value;
         const assignmentData = { imageUrl, title, description, marks, difficulty, dueDate, othersUser: { email } }
-        console.log(assignmentData)
+        // console.log(assignmentData)
         try {
             const { data } = await axios.post(
                 `${import.meta.env.VITE_API_URL}/assignment`,

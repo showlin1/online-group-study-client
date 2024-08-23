@@ -30,7 +30,7 @@ const Assignments = () => {
         }
         getCount()
     }, [filter])
-    console.log(count);
+    // console.log(count);
 
     const numberOfPages = Math.ceil(count / itemsPerPage);
 
@@ -51,7 +51,6 @@ const Assignments = () => {
         const text = e.target.search.value
         setSearch(text)
     }
-    console.log(search);
 
     return (
         <div className="py-24">
