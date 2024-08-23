@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, GithubAuthProvider,
 import { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 
 
@@ -34,6 +35,7 @@ export const AuthProvider = ({ children }) => {
     const logOut = () => {
         setLoading(true);
         return signOut(auth);
+        
     }
 
     useEffect(() => {
@@ -72,6 +74,7 @@ export const AuthProvider = ({ children }) => {
         signInWithPopup(auth, googleProvider)
             .then(result => {
                 console.log(result.user)
+                toast.success('Login Successfully')
             })
             .catch(error => {
                 console.error(error);
@@ -82,6 +85,7 @@ export const AuthProvider = ({ children }) => {
         signInWithPopup(auth, githubProvider)
             .then(result => {
                 console.log(result.user)
+                toast.success('Login Successfully')
             })
             .catch(error => {
                 console.error(error);
